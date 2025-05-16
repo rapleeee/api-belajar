@@ -3,26 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\dataSiswa;
+use App\Models\dataGuru;
 use Illuminate\Http\Request;
 
-class SiswaController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // return response()->json([
-        //     'data' => [
-        //         [
-        //             'id' => 1,
-        //             'name' => 'Alex',
-        //             'age' => 42
-        //         ]
-        //     ]
-        // ]);
-        return response()->json(dataSiswa::all());
+
+        return response() -> json(dataGuru::all());
+        
     }
 
     /**
@@ -33,14 +26,12 @@ class SiswaController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:1|max:120',
-            'grade' => 'required|string|max:10',
-            'nisn' => 'required|string|max:20|unique:data_siswas',
-            'address' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:15',
+            'employee_id' => 'required|string|max:20|unique:data_gurus',
+            'subject' => 'required|string|max:50',
         ]);
 
-        $dataSiswa = dataSiswa::create($request->all());
-        return response()->json($dataSiswa, 201);
+        $dataGuru = dataGuru::create($request->all());
+        return response()->json($dataGuru, 201);
     }
 
     /**
@@ -48,7 +39,11 @@ class SiswaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $dataGuru = dataGuru::find($id);
+        if (!$dataGuru) {
+            return response()->json(['message' => 'Data not found'], 404);
+        }
+        return response()->json($dataGuru);
     }
 
     /**

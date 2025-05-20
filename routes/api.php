@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\IbadahController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SiswaController;
@@ -13,6 +14,7 @@ Route::apiResource('siswa', SiswaController::class);
 
 Route::apiResource('guru', GuruController::class);
 
+Route::apiResource('ibadah', IbadahController::class);
 
 // Route::get('/hello', function () {
 //     return response()->json(['message' => 'Hello, World!']);
